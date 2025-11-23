@@ -3,8 +3,7 @@ import Wordbox from '../Wordbox';
 import wordList from '../../word-list';
 import './style.css';
 
-// TODO: temporary disable function - remove next line when you start using it
-/* eslint-disable-next-line @typescript-eslint/no-unused-vars */
+// generovani slov ze seznamu
 const generateWord = (size: number) => {
   const sizeIndex = size === undefined
     ? Math.floor(Math.random() * wordList.length)
@@ -19,6 +18,7 @@ const generateWord = (size: number) => {
   return words[wordIndex];
 };
 
+//zobrazeni COUNT slov o SIZE delce ze seznamu, vraci pole COUNT slov
 const makeInitialWords = (count = 3, size = 6) => {
   const arr: string[] = [];
   while (arr.length < count) {
@@ -33,6 +33,7 @@ const Stage = () => {
   const [words, setWords] = useState<string[]>(() => makeInitialWords(3, 6));
   const [mistakes, setMistakes] = useState<number>(0)
 
+  //kdyz jedno slovo je hotove, nahrazeni dalsim
   const handleFinish = () => {
     setWords(prev => {
       const newArr = prev.slice(1);
@@ -42,6 +43,7 @@ const Stage = () => {
     });
   };
 
+  //pocitadlo chyb
   const handleMistake = () => {
     setMistakes(prev => prev + 1);
   }
@@ -54,7 +56,7 @@ const Stage = () => {
           <Wordbox
             word={word}
             key={`${word}-${idx}`}
-            onFinish={handleFinish}
+            onFinish={handleFinish} 
             active={idx === 0}
             onMistake={handleMistake}
           />

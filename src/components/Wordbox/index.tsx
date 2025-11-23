@@ -18,6 +18,7 @@ const Wordbox: React.FC<IWordboxProp> = ({ word, onFinish, active, onMistake }) 
     setMistake(false);
   }, [word]);
 
+  //reakce na kazdy stisk klavesnice
   useEffect(() => {
     if (!active) return;
 
@@ -31,6 +32,7 @@ const Wordbox: React.FC<IWordboxProp> = ({ word, onFinish, active, onMistake }) 
       const isCorrect = expected.toLowerCase() === key.toLowerCase();
 
       if (isCorrect) {
+        // Správné písmeno: reset chyby a odebrání písmena
         if (mistake) setMistake(false);
 
         if (lettersLeft.length === 1) {
@@ -54,7 +56,7 @@ const Wordbox: React.FC<IWordboxProp> = ({ word, onFinish, active, onMistake }) 
 
   return (
     <div className={`wordbox ${mistake ? 'wordbox--mistake' : ''}`}>
-      {lettersLeft || '✔️ Hotovo!'}
+    {lettersLeft}
     </div>
   );
 };
